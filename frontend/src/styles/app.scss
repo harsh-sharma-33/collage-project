@@ -1,0 +1,24 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Montserrat, sans-serif;
+}
+
+@import "./homeScreen";
+@import "./navBar";
+@import "./resultScreen";
+@import "./card";
+@import "./userScreen";
+@import "./popUp";
+@import "./registerScreen";
+@import "./loginScreen";
+@import "./admin";
+
+.links {
+  text-decoration: none;
+  color: white;
+  margin-right: 10px;
+}

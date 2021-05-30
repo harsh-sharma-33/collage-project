@@ -1,0 +1,121 @@
+.popup-wrapper {
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  backdrop-filter: blur(10px);
+}
+
+.popup-wrapper.close {
+  display: none;
+}
+
+.popup-component {
+  position: absolute;
+  max-width: 40%;
+  max-height: 70%;
+  background: #f4f4f4;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 1px 1px 30px 1px rgba(0, 0, 0, 0.5),
+    -1px -1px 30px 3px rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+  padding: 1.5rem 2rem;
+  overflow: auto;
+  .about {
+    text-align: center;
+    h2 {
+      position: relative;
+      &::before {
+        position: absolute;
+        content: "";
+        width: 15%;
+        bottom: -5px;
+        height: 2px;
+        background: linear-gradient(to right, #0c5ec8, #00bfff);
+      }
+    }
+    p {
+      margin-top: 30px;
+    }
+  }
+
+  .list-data {
+    text-align: center;
+    ul {
+      padding: 1rem 3rem;
+      list-style: none;
+      li {
+        margin-top: 15px;
+      }
+    }
+    h2 {
+      text-transform: capitalize;
+      position: relative;
+      &::before {
+        position: absolute;
+        content: "";
+        width: 30%;
+        bottom: -5px;
+        height: 2px;
+        background: linear-gradient(to right, #0c5ec8, #00bfff);
+      }
+    }
+  }
+}
+
+.close-btn {
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  transition: 0.4s ease;
+  z-index: 1;
+  &:hover {
+    transform: rotate(90deg);
+  }
+  &::before,
+  &::after {
+    position: absolute;
+    content: "";
+    height: 100%;
+    width: 2px;
+    background: linear-gradient(to right, #0c5ec8, #00bfff);
+  }
+  &::before {
+    transform: translateX(-50%) rotate(45deg);
+    left: 50%;
+  }
+  &::after {
+    right: 50%;
+    transform: translateX(50%) rotate(-45deg);
+  }
+}
+
+.contact-li-flex {
+  display: flex;
+  // justify-content: center;
+  align-items: center;
+  svg {
+    font-size: x-large;
+    margin-right: 20px;
+    color: #0c5ec8;
+  }
+  a {
+    color: #0c5ec8;
+    text-decoration: none;
+    text-align: left;
+  }
+}
+
+.contact-hr {
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  width: 50%;
+  margin: auto;
+  margin-top: 20px;
+}

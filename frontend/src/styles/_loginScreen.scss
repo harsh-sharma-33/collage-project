@@ -1,0 +1,10 @@
+input.input {
+  width: 80%;
+  margin-bottom: 40px;
+}
+.left {
+  flex-grow: 2;
+  .login {
+    width: 120px;
+  }
+}

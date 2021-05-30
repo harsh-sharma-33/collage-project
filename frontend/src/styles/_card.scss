@@ -1,0 +1,123 @@
+.card-body-wrap {
+  transition: 0.4s ease;
+  border-radius: 4px;
+  padding: 10px;
+  margin-bottom: 40px;
+  width: 300px;
+  height: 350px;
+  &:hover,
+  &:focus {
+    box-shadow: 0px 0px 10px 5px #ccc;
+  }
+}
+
+.card-wrapper {
+  border-radius: 4px;
+  position: relative;
+  color: white;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  filter: grayscale(100%);
+  transition: 0.4s ease;
+  &::before {
+    content: "";
+    position: absolute;
+    top: 40%;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    background: linear-gradient(to top, rgba(0, 0, 0, 1), transparent);
+    opacity: 0.5;
+    transition: 0.5s ease;
+  }
+  &:hover {
+    filter: grayscale(0%);
+    &::before {
+      opacity: 1;
+    }
+  }
+
+  .name-profession {
+    position: absolute;
+    bottom: 20px;
+    left: 15px;
+    transition: 0.4s ease;
+    p {
+      margin-top: 5px;
+      font-weight: 500;
+    }
+  }
+
+  .info-btn {
+    cursor: pointer;
+    z-index: 2;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 5px;
+    svg {
+      font-size: 1.5rem;
+    }
+  }
+
+  .about-overly {
+    transform: translateY(10%);
+    transition: 0.5s ease;
+    visibility: hidden;
+    opacity: 0;
+    // overflow: hidden;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 15px;
+    backdrop-filter: blur(10px);
+    img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      border: 2px solid white;
+    }
+
+    h2 {
+      font-size: 20px;
+    }
+    p {
+      font-weight: 500;
+    }
+    button {
+      height: 30px;
+      width: 100%;
+      font-weight: 500;
+      background: linear-gradient(to right, #0c5ec8, #00bfff);
+      border: none;
+      cursor: pointer;
+      transition: 0.4s ease;
+      &:hover {
+        border: 1px solid white;
+      }
+    }
+  }
+}
+
+.card-body-wrap.info-on {
+  .card-wrapper {
+    .name-profession {
+      opacity: 0;
+    }
+    .about-overly {
+      transform: translateY(0%);
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+}

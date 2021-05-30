@@ -1,0 +1,76 @@
+.home-screen-wrapper {
+  min-height: 100vh;
+  //   max-width: 100vw;
+  // background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+  //   url("../img/joshua-reddekopp-SyYmXSDnJ54-unsplash.jpg");
+
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url("../img/patrick-fore-0_AX9pab940-unsplash.jpg");
+  background-position: bottom;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.home-screen-main {
+  display: flex;
+  min-height: 80vh;
+  flex-direction: column;
+  justify-content: center;
+  padding: 2% 40% 2% 10%;
+  color: #fff;
+  h1 {
+    font-size: 4.5rem;
+  }
+
+  p {
+    margin-top: 50px;
+    font-weight: 600;
+  }
+
+  div {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    input {
+      width: 50%;
+      height: 40px;
+      border: 1px solid black;
+      border-right: 0;
+      padding-left: 10px;
+      outline: none;
+      color: rgba(0, 0, 0, 0.8);
+    }
+    button {
+      background: #fff;
+      cursor: pointer;
+      color: black;
+      border: 1px solid black;
+      border-left: 0;
+      height: 40px;
+      width: 40px;
+      outline: none;
+      padding-right: 10px;
+      svg {
+        height: 20px;
+        width: 20px;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .home-screen-main {
+    h1 {
+      font-size: 3rem;
+    }
+    div {
+      input {
+        border-right: 0;
+        width: 100%;
+      }
+      button {
+        border-left: 0;
+      }
+    }
+  }
+}

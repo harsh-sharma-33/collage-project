@@ -1,0 +1,38 @@
+.result-screen-top {
+  position: relative;
+  background: linear-gradient(to right, #00214c, #005a77);
+  input {
+    width: 40%;
+    height: 60px;
+    position: absolute; // TODO: Change position absolute to make input responsive
+    top: 50%;
+    right: 50%;
+    border: none;
+    outline: none;
+    font-size: larger;
+    padding: 0 10px;
+    box-shadow: 0px 0px 20px 5px #005a77;
+    transform: translate(50%, 50%);
+    transition: 0.4s ease;
+
+    &:focus {
+      border: 2px solid #005a77;
+      box-shadow: 0px 0px 40px 10px #005a77;
+    }
+  }
+}
+
+.search-result-main {
+  // margin-top: 100px;
+  padding: 7% 10%;
+  .search-result-for {
+    text-align: center;
+    font-weight: 600;
+    margin-bottom: 50px;
+  }
+  .card-container {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    justify-content: space-between;
+  }
+}
