@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react"
 import { BsPhone, BsEnvelope } from "react-icons/bs"
 import { BiPencil } from "react-icons/bi"
-import { AiOutlineHome } from "react-icons/ai"
+import { AiOutlineHome, AiOutlineArrowRight } from "react-icons/ai"
+
 import axios from "axios"
 import ld from "lodash"
 import { toast, ToastContainer } from "react-toastify"
@@ -12,6 +13,10 @@ const UserScreen = ({ id: UserId }) => {
   const [readMoreButton, setReadMoreButton] = useState("")
   const [clickedButton, setClickedButton] = useState(false)
   const [refresh, setRefresh] = useState(false)
+  const [penClicked, setPenClicked] = useState(false)
+  const [name, setUserName] = useState("")
+  const [profession, setProfession] = useState("")
+  const [uploading, setUploading] = useState(false)
   useEffect(() => {
     const fetchUserData = async () => {
       try {
@@ -59,6 +64,79 @@ const UserScreen = ({ id: UserId }) => {
     }
   }
 
+  const editHandler = async () => {
+    const { token } = JSON.parse(localStorage.getItem("userInfo"))
+
+    const config = {
+      "Content-Type": "application/json",
+      headers: { Authorization: `Bearer ${token}` },
+    }
+
+    try {
+      const { data } = await axios.post(
+        "/api/change/username",
+        { name, profession },
+        config
+      )
+      if (data) {
+        toast.info("Changed")
+        setPenClicked(false)
+        setRefresh(!refresh)
+      }
+    } catch (error) {
+      toast.error(error.message)
+      setPenClicked(false)
+    }
+  }
+
+  const uploadProfileHandler = async (e) => {
+    const { token } = JSON.parse(localStorage.getItem("userInfo"))
+    const file = e.target.files[0]
+    const formData = new FormData()
+    formData.append("image", file)
+    setUploading(true)
+    try {
+      const config = {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${token}`,
+        },
+      }
+      const { data } = await axios.post("/api/upload/profile", formData, config)
+      if (data) {
+        toast.success("Profile Updated")
+        setRefresh(!refresh)
+      }
+      setUploading("false")
+    } catch (error) {
+      toast.error(error.message)
+    }
+  }
+
+  const uploadBannerHandler = async (e) => {
+    const { token } = JSON.parse(localStorage.getItem("userInfo"))
+    const file = e.target.files[0]
+    const formData = new FormData()
+    formData.append("image", file)
+    setUploading(true)
+    try {
+      const config = {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${token}`,
+        },
+      }
+      const { data } = await axios.post("/api/upload/cover", formData, config)
+      if (data) {
+        toast.success("Cover Updated")
+        setRefresh(!refresh)
+      }
+      setUploading("false")
+    } catch (error) {
+      toast.error(error.message)
+    }
+  }
+
   return (
     <>
       <ToastContainer />
@@ -96,20 +174,70 @@ const UserScreen = ({ id: UserId }) => {
             <div className="user-image">
               <img src={user.image} alt="profile" className="profile-img" />
               <div className="edit-pen">
-                <BiPencil />
+                <input
+                  type="file"
+                  name="profile"
+                  id="profile-btn"
+                  className="profile-upload-btn"
+                  onChange={uploadProfileHandler}
+                />
+                <BiPencil className="profile-pen-icon" />
               </div>
             </div>
-            <button>Message</button>
+            <button id="message">Message</button>
+
+            <div className="banner-edit">
+              <input
+                type="file"
+                name="banner"
+                id="banner"
+                onChange={uploadBannerHandler}
+              />
+              <BiPencil size="1.5rem" />
+            </div>
           </div>
 
           <div className="user-content">
             <div className="left">
               <div className="name-profession-wrap">
-                <h1 className="user-name">{user.name}</h1>
-                <h3>{user.profession}</h3>
-                <div className="edit-pen">
-                  <BiPencil />
-                </div>
+                {penClicked ? (
+                  <>
+                    <input
+                      type="text"
+                      name="name"
+                      className="name-prof"
+                      placeholder="Enter Name"
+                      value={name}
+                      onChange={(e) => {
+                        setUserName(e.target.value)
+                      }}
+                    />
+                    <input
+                      type="text"
+                      name="profession"
+                      className="name-prof"
+                      placeholder="Enter Profession"
+                      value={profession}
+                      onChange={(e) => {
+                        setProfession(e.target.value)
+                      }}
+                    />
+                    <div className="edit-pen" onClick={editHandler}>
+                      <AiOutlineArrowRight />
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <h1 className="user-name">{user.name}</h1>
+                    <h3>{user.profession}</h3>
+                    <div
+                      className="edit-pen"
+                      onClick={() => setPenClicked(true)}
+                    >
+                      <BiPencil />
+                    </div>
+                  </>
+                )}
               </div>
               <div className="contact-info">
                 <h3>Contact</h3>

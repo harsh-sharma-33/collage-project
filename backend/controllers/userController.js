@@ -222,3 +222,53 @@ export const deleteContactInfo = async (req, res, next) => {
     next(error)
   }
 }
+
+// Desc     Delete Contact Info
+// Route    GET /api/delete/contact/:whatToDelete
+// Access   Private
+
+export const changeUsername = async (req, res, next) => {
+  const { name, profession } = req.body
+  const requestedUserId = req.user._id
+  try {
+    const user = await User.findById(requestedUserId).select("-password")
+    user.profession = profession
+    user.name = name
+    user.save()
+    res.status(200).send("success")
+  } catch (error) {
+    next(error)
+  }
+}
+
+// Desc     Update User Profile
+// Route    POST /api/upload/profile
+// Access   Private
+
+export const changeProfile = async (req, res, next) => {
+  const requestedUserId = req.user._id
+  try {
+    const user = await User.findById(requestedUserId).select("-password")
+    user.image = `/${req.file.path}`
+    user.save()
+    res.status(200).send("success")
+  } catch (error) {
+    next(error)
+  }
+}
+
+// Desc     Update User Cover
+// Route    POST /api/upload/cover
+// Access   Private
+
+export const changeCover = async (req, res, next) => {
+  const requestedUserId = req.user._id
+  try {
+    const user = await User.findById(requestedUserId).select("-password")
+    user.cover = `/${req.file.path}`
+    user.save()
+    res.status(200).send("success")
+  } catch (error) {
+    next(error)
+  }
+}

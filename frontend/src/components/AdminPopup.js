@@ -146,7 +146,7 @@ const AdminPopUp = ({ data, dataType, click, refresh, setRefresh }) => {
       headers: { Authorization: `Bearer ${token}` },
     }
     try {
-      const { data } = await axios.get(`/api/delete/contact/${item}`, config)
+      const { data } = await axios.get(`/api/delete/remove/${item}`, config)
       if (data) {
         toast.info("Deleted")
         setRefresh(!refresh)
