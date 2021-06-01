@@ -1,4 +1,5 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
+import axios from "axios"
 import { Link } from "react-router-dom"
 const NavBar = ({ history }) => {
   const [navOpen, setNavOpen] = useState(false)
@@ -13,6 +14,24 @@ const NavBar = ({ history }) => {
     setUserInfo(null)
     setLogout(false)
   }
+
+  useEffect(() => {
+    const { id } = JSON.parse(localStorage.getItem("userInfo"))
+    const fetchUserData = async () => {
+      try {
+        const { data } = await axios.get(`/api/user/${id}`)
+        if (data) {
+          setUserInfo(data)
+        }
+      } catch (error) {
+        console.log(error.message)
+      }
+    }
+
+    fetchUserData()
+  }, [])
+
+  console.log(userInfo)
   return (
     <nav className="navbar">
       {logout && (
