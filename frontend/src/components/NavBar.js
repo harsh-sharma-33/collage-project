@@ -16,7 +16,10 @@ const NavBar = ({ history }) => {
   }
 
   useEffect(() => {
-    const { id } = JSON.parse(localStorage.getItem("userInfo"))
+    let id
+    if (localStorage.getItem("userInfo")) {
+      id = JSON.parse(localStorage.getItem("userInfo")).id
+    }
     const fetchUserData = async () => {
       try {
         const { data } = await axios.get(`/api/user/${id}`)

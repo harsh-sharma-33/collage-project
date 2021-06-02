@@ -27,8 +27,8 @@ const RegisterScreen = ({ history }) => {
   const handleFormSubmit = async () => {
     try {
       const { data } = await axios.post("/api/user/login", formData)
-      localStorage.setItem("userInfo", JSON.stringify(data))
       if (data.token) {
+        localStorage.setItem("userInfo", JSON.stringify(data))
         history.push("/")
       }
     } catch (error) {
